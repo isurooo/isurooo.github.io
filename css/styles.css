@@ -7947,6 +7947,11 @@ textarea.form-control-lg {
 
 .rounded-circle {
   border-radius: 50% !important;
+filter: grayscale(0%);
+transition: all 800ms;
+}
+.rounded-circle:hover{
+filter: grayscale(100%);
 }
 
 .rounded-pill {
@@ -11371,6 +11376,14 @@ p.lead {
     max-height: 10rem;
     border: 0.5rem solid rgba(255, 255, 255, 0.2);
   }
+  .img-profile:hover{
+    transform: rotate(360deg);
+  }
+
+
+
+  
+  
   #sideNav .navbar-collapse {
     display: flex;
     align-items: flex-start;
