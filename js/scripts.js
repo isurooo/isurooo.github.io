@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', event => {
             offset: 74,
         });
     };
-
+//2024---Needs to be deleted this comment
     // Collapse responsive navbar when toggler is visible
     const navbarToggler = document.body.querySelector('.navbar-toggler');
     const responsiveNavItems = [].slice.call(
