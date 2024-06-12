@@ -9,6 +9,7 @@
 // 
 
 window.addEventListener('DOMContentLoaded', event => {
+    animateText();
 
     // Activate Bootstrap scrollspy on the main nav element
     const sideNav = document.body.querySelector('#sideNav');
@@ -31,4 +32,52 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     });
 
+    function animateText() {
+        var roles = ['Senior QA Engineer', 'Technical Project Manager', 'ScrumMaster'];
+        var roleText = document.getElementById('roles');
+        var index = 0;
+    
+        function typeRole() {
+            var text = roles[index];
+            roleText.textContent = ''; // Clear the previous role
+            typeCharacters(text, 0); // Start typing the current role
+        }
+    
+        function typeCharacters(text, charIndex) {
+            if (charIndex < text.length) {
+                roleText.textContent += text.charAt(charIndex);
+                charIndex++;
+                setTimeout(function () {
+                    typeCharacters(text, charIndex); // Recursive call to type next character
+                }, 100); // Adjust the typing speed as needed
+            } else {
+                // Role typed out, wait before clearing
+                setTimeout(function () {
+                    clearRole(text);
+                }, 1000); // Adjust the delay before clearing as needed
+            }
+        }
+    
+        function clearRole(text) {
+            setTimeout(function () {
+                var len = text.length;
+                var currentText = roleText.textContent;
+                if (currentText.length > 0) {
+                    roleText.textContent = currentText.slice(0, -1); // Remove the last character
+                    setTimeout(function () {
+                        clearRole(text); // Recursive call to clear next character
+                    }, 50); // Adjust the clearing speed as needed
+                } else {
+                    index = (index + 1) % roles.length; // Move to the next role in a loop
+                    setTimeout(function () {
+                        typeRole(); // Type the next role
+                    }, 500); // Adjust the delay before typing the next role as needed
+                }
+            }, 5); // Adjust the delay before clearing as needed
+        }
+    
+        // Start the animation
+        typeRole();
+    }
+    
 });
