@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', event => {
     
         function typeRole() {
             var text = roles[index];
-            roleText.textContent = ''; // Clear the previous role
+            roleText.textContent = ''; // Clear previous role
             typeCharacters(text, 0); // Start typing the current role
         }
     
