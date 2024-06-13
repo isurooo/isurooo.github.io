@@ -4,14 +4,11 @@
 * Copyright 2013-2022 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-resume/blob/master/LICENSE)
 */
-// update3
+// update
 // Scripts 
 // 
 const modeToggle = document.querySelector('#modeToggle');
 const body = document.body;
-const toggleButton = document.querySelector('.toggle-button');
-const lightModeStylesheet = document.querySelector('#lightModeStylesheet');
-const darkModeStylesheet = document.querySelector('#darkModeStylesheet');
 
 window.addEventListener('DOMContentLoaded', event => {
     animateText();
@@ -86,7 +83,7 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
     // Dark mode
-    const modeToggle = document.querySelector('#modeToggle');
+const modeToggle = document.querySelector('#modeToggle');
 const body = document.body;
 
 // Function to activate dark mode
