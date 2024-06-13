@@ -7,10 +7,15 @@
 // update3
 // Scripts 
 // 
+const modeToggle = document.querySelector('#modeToggle');
+const body = document.body;
+const toggleButton = document.querySelector('.toggle-button');
+const lightModeStylesheet = document.querySelector('#lightModeStylesheet');
+const darkModeStylesheet = document.querySelector('#darkModeStylesheet');
 
 window.addEventListener('DOMContentLoaded', event => {
     animateText();
-
+    
     // Activate Bootstrap scrollspy on the main nav element
     const sideNav = document.body.querySelector('#sideNav');
     if (sideNav) {
@@ -79,5 +84,42 @@ window.addEventListener('DOMContentLoaded', event => {
         // Start the animation
         typeRole();
     }
-    
+
+    // Dark mode
+    const modeToggle = document.querySelector('#modeToggle');
+const body = document.body;
+
+// Function to activate dark mode
+function activateDarkMode() {
+  body.classList.add('dark-mode');
+  body.classList.remove('light-mode');
+  localStorage.setItem('mode', 'dark');
+}
+
+// Function to activate light mode
+function activateLightMode() {
+  body.classList.add('light-mode');
+  body.classList.remove('dark-mode');
+  localStorage.setItem('mode', 'light');
+}
+
+// Event listener for the toggle switch
+modeToggle.addEventListener('change', () => {
+  if (modeToggle.checked) {
+    activateDarkMode();
+  } else {
+    activateLightMode();
+  }
+});
+
+// Check local storage for mode preference
+const currentMode = localStorage.getItem('mode');
+if (currentMode === 'dark') {
+  activateDarkMode();
+  modeToggle.checked = true;
+} else {
+  activateLightMode();
+  modeToggle.checked = false;
+}
+
 });
