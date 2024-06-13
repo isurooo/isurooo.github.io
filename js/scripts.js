@@ -4,9 +4,7 @@
 * Copyright 2013-2022 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-resume/blob/master/LICENSE)
 */
-// update
-// Scripts 
-// 
+
 const modeToggle = document.querySelector('#modeToggle');
 const body = document.body;
 
@@ -82,7 +80,7 @@ window.addEventListener('DOMContentLoaded', event => {
         typeRole();
     }
 
-    // Dark mode
+// Dark mode
 const modeToggle = document.querySelector('#modeToggle');
 const body = document.body;
 
