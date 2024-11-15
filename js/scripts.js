@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
     function animateText() {
-        var roles = ['Senior QA Engineer', 'Technical Project Manager', 'ScrumMaster'];
+        var roles = ['QA Lead', 'Technical Project Manager', 'ScrumMaster'];
         var roleText = document.getElementById('roles');
         var index = 0;
     
