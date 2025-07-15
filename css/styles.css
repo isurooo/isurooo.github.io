@@ -1,5 +1,5 @@
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   background-color: #1a202c; /* Dark background */
   color: #e2e8f0; /* Light text */
 }
@@ -12,6 +12,63 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Fade In with Scale Animation */
+.animate-fade-in-scale {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.animate-fade-in-scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Slide In from Left Animation */
+.animate-slide-in-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.animate-slide-in-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Bounce In Animation */
+.animate-bounce-in {
+  opacity: 0;
+  transform: scale(0.3);
+  transition: opacity 0.6s ease-out,
+    transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.animate-bounce-in.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Zoom In Animation */
+.animate-zoom-in {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.animate-zoom-in.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Rotate In Animation */
+.animate-rotate-in {
+  opacity: 0;
+  transform: scale(0.8) rotate(-10deg);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.animate-rotate-in.is-visible {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
 .chat-message.user {
   background-color: #48bb78; /* Green-500 for user messages in dark theme */
   color: #ffffff;
@@ -48,6 +105,10 @@ body {
   margin-right: 8px; /* Space between spinner and text */
 }
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
