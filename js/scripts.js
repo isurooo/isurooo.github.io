@@ -386,7 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       // Open the Google Drive resume in a new tab
       window.open(
-        "https://drive.google.com/file/d/1vd_TxKizCBCEnKkwroSNL5H8EQsVqWbT/view",
+        "https://drive.google.com/file/d/1fIGRPDKyL662sWHrL_94-xGjFWD1RPvf/view?usp=sharing",
         "_blank"
       );
     });
