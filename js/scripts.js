@@ -349,6 +349,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Active nav link on scroll
+  const navLinks = document.querySelectorAll('nav a[href^="#"], #mobile-menu a[href^="#"]');
+  const sectionIds = ['hero', 'about', 'skills', 'experience', 'projects', 'blogs', 'contact'];
+  const sectionEls = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+  const setActive = (id) => {
+    navLinks.forEach(link => {
+      const matches = link.getAttribute('href') === `#${id}`;
+      link.classList.toggle('nav-active', matches);
+    });
+  };
+
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) setActive(entry.target.id);
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+  sectionEls.forEach(el => navObserver.observe(el));
+
   // Intersection Observer for Section Animations
   const sections = document.querySelectorAll(".section-animation");
   const animatedElements = document.querySelectorAll(
@@ -391,3 +411,85 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     });
 });
+
+// ── Hero Particles (particles.js style — dots + connecting lines) ─────────────
+(() => {
+  const canvas = document.getElementById('hero-particles');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const DOT_COLOR = '99,120,220';  // soft indigo — visible on white
+  const LINE_COLOR = '99,120,220';
+  const CONNECT_DIST = 130;           // px — max distance for connecting line
+  const SPEED = 0.38;          // max px/frame
+  const COUNT = 55;
+  const RADIUS = 2.8;
+
+  let dots = [];
+  const rand = (min, max) => Math.random() * (max - min) + min;
+
+  const setSize = () => {
+    canvas.width = canvas.parentElement.offsetWidth || window.innerWidth;
+    canvas.height = canvas.parentElement.offsetHeight || 520;
+  };
+
+  const makeDot = () => ({
+    x: rand(0, canvas.width),
+    y: rand(0, canvas.height),
+    vx: rand(-SPEED, SPEED),
+    vy: rand(-SPEED, SPEED),
+  });
+
+  const init = () => {
+    setSize();
+    dots = Array.from({ length: COUNT }, makeDot);
+  };
+
+  init();
+  window.addEventListener('resize', init);
+
+  const tick = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const W = canvas.width, H = canvas.height;
+
+    // Move & wrap edges
+    for (const d of dots) {
+      d.x += d.vx;
+      d.y += d.vy;
+      if (d.x < 0) d.x = W;
+      if (d.x > W) d.x = 0;
+      if (d.y < 0) d.y = H;
+      if (d.y > H) d.y = 0;
+    }
+
+    // Draw connecting lines between nearby dots
+    for (let i = 0; i < dots.length; i++) {
+      for (let j = i + 1; j < dots.length; j++) {
+        const dx = dots[i].x - dots[j].x;
+        const dy = dots[i].y - dots[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < CONNECT_DIST) {
+          const alpha = (1 - dist / CONNECT_DIST) * 0.35;
+          ctx.beginPath();
+          ctx.moveTo(dots[i].x, dots[i].y);
+          ctx.lineTo(dots[j].x, dots[j].y);
+          ctx.strokeStyle = `rgba(${LINE_COLOR},${alpha})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw dots on top
+    for (const d of dots) {
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, RADIUS, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${DOT_COLOR},0.55)`;
+      ctx.fill();
+    }
+
+    requestAnimationFrame(tick);
+  };
+
+  tick();
+})();
