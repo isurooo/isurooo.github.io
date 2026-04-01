@@ -5,7 +5,33 @@
   <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Isuru Rodrigo - Portfolio</title>
+  <title>Isuru Rodrigo — Lead QA Engineer & Scrum Master</title>
+
+  <!-- SEO -->
+  <meta name="description"
+    content="Isuru Rodrigo — Lead QA Engineer and Scrum Master with 10+ years of experience in test automation, Agile delivery, and CI/CD. Specialising in Cypress, Playwright, Appium, and Selenium." />
+  <meta name="author" content="Isuru Rodrigo" />
+  <meta name="keywords"
+    content="QA Engineer, Test Automation, Scrum Master, Cypress, Playwright, Selenium, Appium, CI/CD, Agile" />
+
+  <!-- Open Graph (LinkedIn, Slack, etc.) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://isuroo.com/" />
+  <meta property="og:title" content="Isuru Rodrigo — Lead QA Engineer & Scrum Master" />
+  <meta property="og:description"
+    content="10+ years in software testing & automation. Specialising in Cypress, Playwright, Appium and Agile delivery." />
+  <meta property="og:image" content="https://isuroo.com/assets/img/profile.jpg" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Isuru Rodrigo — Lead QA Engineer & Scrum Master" />
+  <meta name="twitter:description"
+    content="10+ years in software testing & automation. Specialising in Cypress, Playwright, Appium and Agile delivery." />
+  <meta name="twitter:image" content="https://isuroo.com/assets/img/profile.jpg" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://isuroo.com/" />
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Inter Font -->
@@ -129,6 +155,9 @@
 </head>
 
 <body>
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+
   <!-- Navigation -->
   <nav class="fixed w-full z-10 top-0">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -169,7 +198,7 @@
           Hi, I'm Isuru Rodrigo
         </h1>
         <p class="hero-subtitle mb-8">
-          Lead QA Engineer & Scrum Master
+          <span id="typewriter-text"></span><span class="typewriter-cursor" aria-hidden="true">|</span>
         </p>
         <div class="flex flex-wrap justify-center items-center gap-3 mb-8">
           <a href="#" id="download-resume-btn" class="btn-primary animate-bounce-in">
