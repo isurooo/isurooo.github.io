@@ -279,6 +279,56 @@ window.initChat = async (
 
 // General JavaScript for animations and mobile menu
 document.addEventListener("DOMContentLoaded", () => {
+
+  // ── Scroll Progress Bar ────────────────────────────────────────────────────
+  const progressBar = document.getElementById('scroll-progress');
+  if (progressBar) {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = total > 0 ? (scrolled / total * 100) + '%' : '0%';
+    }, { passive: true });
+  }
+
+  // ── Typewriter Cycling Subtitle ────────────────────────────────────────────
+  const typeEl = document.getElementById('typewriter-text');
+  if (typeEl) {
+    const roles = [
+      'Lead QA Engineer',
+      'Scrum Master',
+      'Test Automation Expert',
+      'CI/CD Advocate',
+    ];
+    let roleIdx = 0, charIdx = 0, deleting = false;
+    const TYPE_SPEED = 75;
+    const DELETE_SPEED = 40;
+    const PAUSE_END = 1800;
+    const PAUSE_START = 300;
+
+    const type = () => {
+      const current = roles[roleIdx];
+      if (!deleting) {
+        typeEl.textContent = current.slice(0, ++charIdx);
+        if (charIdx === current.length) {
+          deleting = true;
+          setTimeout(type, PAUSE_END);
+          return;
+        }
+        setTimeout(type, TYPE_SPEED);
+      } else {
+        typeEl.textContent = current.slice(0, --charIdx);
+        if (charIdx === 0) {
+          deleting = false;
+          roleIdx = (roleIdx + 1) % roles.length;
+          setTimeout(type, PAUSE_START);
+          return;
+        }
+        setTimeout(type, DELETE_SPEED);
+      }
+    };
+    setTimeout(type, 600);
+  }
+
   // Get all chat elements here, ensuring they are in the DOM
   chatButton = document.getElementById("chat-button");
   chatModal = document.getElementById("chat-modal");

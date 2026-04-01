@@ -107,6 +107,34 @@ nav .brand-link:active {
   font-weight: 600;
 }
 
+#mobile-menu a.nav-active {
+  color: var(--accent) !important;
+  background: var(--accent-light) !important;
+  font-weight: 600;
+}
+
+/* Scroll Progress Bar */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2.5px;
+  width: 0%;
+  background: var(--accent);
+  z-index: 9999;
+  transition: width .08s linear;
+  border-radius: 0 2px 2px 0;
+}
+
+/* Typewriter cursor */
+.typewriter-cursor {
+  display: inline-block;
+  color: var(--accent);
+  font-weight: 300;
+  animation: blink 1s step-end infinite;
+  margin-left: 1px;
+}
+
 /* Animations */
 .section-animation {
   opacity: 0;
