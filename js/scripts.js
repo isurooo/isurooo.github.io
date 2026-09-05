@@ -280,14 +280,43 @@ window.initChat = async (
 // General JavaScript for animations and mobile menu
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ── Scroll Progress Bar ────────────────────────────────────────────────────
+  // ── Scroll progress and gentle depth motion ───────────────────────────────
   const progressBar = document.getElementById('scroll-progress');
-  if (progressBar) {
-    window.addEventListener('scroll', () => {
-      const scrolled = window.scrollY;
-      const total = document.documentElement.scrollHeight - window.innerHeight;
+  const motionTargets = document.querySelectorAll('.hero-card, .skill-card');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let scrollFrame = null;
+
+  const updateScrollEffects = () => {
+    scrollFrame = null;
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+
+    if (progressBar) {
       progressBar.style.width = total > 0 ? (scrolled / total * 100) + '%' : '0%';
-    }, { passive: true });
+    }
+
+    if (!reducedMotion) {
+      motionTargets.forEach((target, index) => {
+        const bounds = target.getBoundingClientRect();
+        const centerOffset = (bounds.top + bounds.height / 2 - window.innerHeight / 2) / window.innerHeight;
+        const amount = Math.max(-1, Math.min(1, centerOffset)) * (index % 2 ? -5 : 5);
+        target.style.setProperty('--drift', `${amount}px`);
+      });
+    }
+  };
+
+  motionTargets.forEach((target) => target.classList.add('scroll-drift'));
+
+  window.addEventListener('scroll', () => {
+    if (!scrollFrame) {
+      scrollFrame = requestAnimationFrame(updateScrollEffects);
+    }
+  }, { passive: true });
+  updateScrollEffects();
+
+  if (progressBar) {
+    // Keep the progress indicator in sync after layout-changing content loads.
+    window.addEventListener('resize', updateScrollEffects, { passive: true });
   }
 
   // ── Typewriter Cycling Subtitle ────────────────────────────────────────────
@@ -448,6 +477,22 @@ document.addEventListener("DOMContentLoaded", () => {
   animatedElements.forEach((element) => {
     observer.observe(element);
   });
+
+  // ── Hero / About blending overlay ────────────────────────────────────────
+  // Toggle a body class when the About section becomes visible to fade the
+  // hero bottom overlay (see css/styles.css for styles)
+  const aboutEl = document.getElementById('about');
+  if (aboutEl) {
+    const heroBlendObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        // When About is intersecting (visible), hide the hero overlay so the
+        // About section's background shows through — gives a blending effect
+        document.body.classList.toggle('hero-overlay-hidden', entry.isIntersecting);
+      });
+    }, { threshold: 0.18 });
+
+    heroBlendObserver.observe(aboutEl);
+  }
 
   // Resume download button action - opens Google Drive resume
   document
